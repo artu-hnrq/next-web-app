@@ -1,0 +1,3 @@
+interface client {
+    getTours,
+}
