@@ -1,3 +1,5 @@
+import Bar from './Bar';
+import Tours from './Tours';
 import Logo from './Logo';
 
-export { Logo };
+export { Bar, Logo, Tours };
