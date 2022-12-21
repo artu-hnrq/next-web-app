@@ -21,7 +21,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@components": ["components"],
+      "@client-components": ["components/client"],
+      "@server-components": ["components/server"],
       "@api": ["api"],
       "@lib/*": ["lib/*"]
     }
