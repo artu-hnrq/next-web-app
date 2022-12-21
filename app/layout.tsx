@@ -1,5 +1,6 @@
 import './globals.scss'
 import { Banner } from '@server-components'
+import styles from "./page.module.scss";
 
 
 export default function RootLayout({children,}: {children: React.ReactNode}) {
@@ -8,7 +9,9 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
       <head/>
       <body>
         <Banner>
-            {/*TODO: Include banner content*/}
+            <p className={styles.description}>
+              A companhia mais certa para seus momentos de maior loucura!
+            </p>
         </Banner>
         {children}
       </body>

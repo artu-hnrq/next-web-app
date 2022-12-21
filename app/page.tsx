@@ -10,17 +10,7 @@ export default async function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        
-        <h1 className={styles.title}>
-          <a href="https://instagram.com/navetrance">Nave trance</a>
-        </h1>
-
-        <p className={styles.description}>
-          A companhia mais certa para seus momentos de{' '}
-          <code className={styles.code}>maior loucura!</code>
-        </p>
-
-        <h5>Próximas excursões:</h5>
+        <h2>Próximas excursões:</h2>
         <Tours tours={tours}/>
       </main>
 

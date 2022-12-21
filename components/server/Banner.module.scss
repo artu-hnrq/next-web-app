@@ -4,7 +4,7 @@
 .banner {
     // Configure banner construction
     $expanded: 50vh;
-    $shrunken: 4rem;
+    $shrunken: 6vh;
     $animation-range: 0, 400;
 
 
@@ -23,6 +23,11 @@
         #2A6D87 35%,
         #213243 85%
     );
+
+    display: flex;
+    place-content: center;
+    place-items: flex-end;
+    flex-flow: column;
 
     @include scroll.range($animation-range...);
 
@@ -57,7 +62,7 @@
         filter: drop-shadow(0 0 1.5rem #73d4ad);
 
 
-        transition: rotate 5s ease-out;
+        transition: rotate 1s ease-out;
 
         @include scroll.animation(move);
         @keyframes move {
@@ -77,13 +82,8 @@
     }
 
     section {
-        display: flex;
-        place-content: center;
-        place-items: flex-start;
-        flex-flow: row wrap;
-
         margin: 0;
-        padding: 0;
+        padding: 0 15vw;
         position: relative;
     }
 }
