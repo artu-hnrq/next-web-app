@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import styles from './page.module.scss'
-import { Logo, Tours } from '@components'
+import { Tours } from '@server-components'
 import api from '@api';
 
 
@@ -10,8 +10,6 @@ export default async function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-
-        <Logo/>
         
         <h1 className={styles.title}>
           <a href="https://instagram.com/navetrance">Nave trance</a>

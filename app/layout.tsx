@@ -1,5 +1,5 @@
 import './globals.scss'
-import { Bar } from 'components'
+import { Banner } from '@server-components'
 
 
 export default function RootLayout({children,}: {children: React.ReactNode}) {
@@ -7,7 +7,9 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
     <html lang="en">
       <head/>
       <body>
-        <Bar/>
+        <Banner>
+            {/*TODO: Include banner content*/}
+        </Banner>
         {children}
       </body>
     </html>

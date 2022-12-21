@@ -1,0 +1,89 @@
+@use '@lib/sass/scroll.scss';
+
+
+.banner {
+    // Configure banner construction
+    $expanded: 50vh;
+    $shrunken: 4rem;
+    $animation-range: 0, 400;
+
+
+    margin: 0;
+    padding: 0;
+    min-height: $expanded;
+    width: 100%;
+
+    position: sticky;
+    top: calc($shrunken - $expanded);
+
+    overflow: hidden;
+    background: linear-gradient(
+        110deg,
+        #2C7B75 12%,
+        #2A6D87 35%,
+        #213243 85%
+    );
+
+    @include scroll.range($animation-range...);
+
+    & > img:first-child {
+        margin: auto;
+        min-height: inherit;
+
+        position: absolute;
+        inset: 0;
+        object-fit: cover;
+
+        opacity: 1;
+        background-size: cover;
+        background-attachment: fixed;
+
+
+        transition: opacity 1s ease-in-out;
+
+        @include scroll.animation(fade-out);
+        @keyframes fade-out {
+            to {
+                opacity: 0;
+            }
+        }
+    }
+
+    .logo {
+        width: auto;
+
+        position: fixed;
+
+        filter: drop-shadow(0 0 1.5rem #73d4ad);
+
+
+        transition: rotate 5s ease-out;
+
+        @include scroll.animation(move);
+        @keyframes move {
+            from {
+                height: 35vh;
+                top: 5vh;
+                left: 10vw;
+                transform:rotate(0deg);
+            }
+            to {
+                height: 10vh;
+                top: 1vh;
+                left: 3vw;
+                transform:rotate(359deg);
+            }
+        }
+    }
+
+    section {
+        display: flex;
+        place-content: center;
+        place-items: flex-start;
+        flex-flow: row wrap;
+
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+}
