@@ -1,0 +1,23 @@
+/// Calculate the rate between two numbers
+/// @param {Number} dividend
+/// @param {Number} divider
+/// @return {Number} - quotient rate (between 0 and 1)
+@function rate($dividend, $divider) {
+    @return clamp(
+        0,
+        calc(#{$dividend} / #{$divider}),
+        1
+    );
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @debug $number;
+    @return $number;
+}

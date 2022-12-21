@@ -1,0 +1,83 @@
+@use 'utils';
+@use 'animation';
+
+
+$start_property_name: --scroll-animation-start !default;
+$offset_property_name: --scroll-animation-offset !default;
+$rate_property_name: --scroll-animation-rate !default;
+
+$default_start: var(#{$start_property_name}, 0) !default;
+$default_offset: var(#{$offset_property_name}, var(--scroll-offsetHeight)) !default;
+
+$scroll-y: var(--scroll-y) !default;
+$scroll-x: var(--scroll-x) !default;
+
+
+/// Measure the scroll relative position for a given range
+/// @param {Number} $scroll-start - Target range start
+/// @param {Number} $scroll-offset - Target range length
+/// @return {Number} - Scroll's relative position for the given range
+@function variation-on-range-rate($scroll-start: $default_start, $scroll-offset: $default_offset){
+    // TODO: Consider horizontal scroll
+    @return utils.rate(
+        calc(#{$scroll-y} - #{$scroll-start}),
+        #{$scroll-offset},
+    );
+}
+
+/// Declare scroll-animation-range properties
+/// @param {Number} $scroll-start - Target range start
+/// @param {Number} $scroll-offset - Target range length
+/// @output {stylesheet} - Scroll animation setting properties
+@mixin range(
+    $scroll-start: $default_start,
+    $scroll-offset: $default_offset
+){
+    #{$start_property_name}: #{$scroll-start};
+    #{$offset_property_name}: #{$scroll-offset};
+}
+
+/// Declare a custom property that keep track of scroll position rate for a given range
+/// @param {Number} $scroll-start - The range start
+/// @param {Number} $scroll-offset - The range length
+/// @param {String} $custom-property-name - Generated property name
+@mixin rate(
+    $scroll-start: $default_start,
+    $scroll-offset: $default_offset,
+    $custom-property-name: #{$rate_property_name}
+) {
+    // {integer} (0..1) - create scrolling rate variable for given range
+    #{$custom-property-name}: #{variation-on-range-rate(
+        $scroll-start,
+        $scroll-offset
+    )};
+}
+
+/// Set animation-related properties to execute according to scroll movement
+/// @param {String} $animation-name - The target @keyframe at-rule
+/// @param {<time>} $animation-duration
+/// @param {<single-easing-function>} $animation-timing-function
+/// @param {Number} $scroll-start - The scroll range start
+/// @param {Number} $scroll-offset - The scroll range length
+/// @output {stylesheet} - Animation properties
+@mixin animation(
+    $animation-name,
+    $animation-duration: 1s,
+    $animation-timing-function: linear,
+    $scroll-start: $default_start,
+    $scroll-offset: $default_offset,
+    $scroll-rate-custom-property-name: $rate_property_name,
+){
+    @include rate(
+        $scroll-start,
+        $scroll-offset,
+        $scroll-rate-custom-property-name
+    );
+
+    @include animation.custom-property-based-execution(
+        #{$scroll-rate-custom-property-name},
+        $animation-name,
+        $animation-duration,
+        $animation-timing-function
+    );
+}

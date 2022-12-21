@@ -1,0 +1,22 @@
+/// Set animation properties to execute according to the target custom property variation
+/// @param {String} $custom-property - Target custom property name
+/// @param {String} $animation-name - The target @keyframe at-rule
+/// @param {<time>} $animation-duration
+/// @param {<single-easing-function>} $animation-timing-function
+/// @output {stylesheet} - Animation properties
+@mixin custom-property-based-execution(
+    $custom-property,
+    $animation-name,
+    $animation-duration: 1s,
+    $animation-timing-function: linear,
+    $animation-iteration-count: 1
+){
+    animation: $animation-name $animation-duration $animation-timing-function;
+    animation-play-state: paused;
+    animation-delay: calc(var(#{$custom-property}) * -#{$animation-duration});
+
+    animation-iteration-count: $animation-iteration-count;
+    animation-fill-mode: both;
+
+    @content
+}
